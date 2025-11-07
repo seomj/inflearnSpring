@@ -22,18 +22,9 @@ public class MemberService {
      * 회원가입
      */
     public Long join(Member member){
-
-        long start = System.currentTimeMillis();
-
-        try {
-            validateDuplicateMember(member); // 중복된 회원이 있는지 확인
-            memberRepository.save(member); // 회원 저장
-            return member.getId(); // 회원의 ID 반환
-        } finally {
-            long finish = System.currentTimeMillis();
-            long timeMs = finish - start;
-            System.out.println("join " + timeMs + "ms");
-        }
+        validateDuplicateMember(member); // 중복된 회원이 있는지 확인
+        memberRepository.save(member); // 회원 저장
+        return member.getId(); // 회원의 ID 반환
     }
 
     private void validateDuplicateMember(Member member){
@@ -47,17 +38,7 @@ public class MemberService {
      * 전체 회원 조회
      */
     public List<Member> findMembers() {
-
-        long start = System.currentTimeMillis();
-
-        try {
-            return memberRepository.findAll();
-        } finally {
-            long finish = System.currentTimeMillis();
-            long timeMs = finish - start;
-            System.out.println("findMembers " + timeMs + "ms");
-        }
-
+        return memberRepository.findAll();
     }
 
     public Optional<Member> findOne(Long memberId){
